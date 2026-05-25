@@ -61,9 +61,8 @@ dependencies {
 	modImplementation "info.journeymap:journeymap-api-fabric:${project.journeymap_api_version}"
 	modImplementation "maven.modrinth:HIuqnQpi:${project.common_networking_version}"
 
-// Xaero's minimap/worldmap
-	// modImplementation "xaero.minimap:xaerominimap-fabric-${project.minecraft_version}:${project.xaeros_minimap_version}"
-	// modImplementation "xaero.map:xaeroworldmap-fabric-${project.minecraft_version}:${project.xaeros_worldmap_version}"
+	// Xaero's worldmap
+	 modImplementation "xaero.map:xaeroworldmap-fabric-${project.minecraft_version}:${project.xaeros_worldmap_version}"
 }
 
 processResources {
