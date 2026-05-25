@@ -20,9 +20,6 @@
 		],
 		"client": [
 			"es.b4t.client.MinecraftYABMapCompatClient"
-		],
-		"journeymap": [
-			"es.b4t.client.JourneyMapPlugin"
 		]
 	},
 	"mixins": [
