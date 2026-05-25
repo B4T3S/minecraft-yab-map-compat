@@ -1,0 +1,39 @@
+{
+	"schemaVersion": 1,
+	"id": "minecraft-yab-map-compat",
+	"version": "${version}",
+	"name": "Minecraft YAB Map-Compat",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/minecraft-yab-map-compat/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"es.b4t.MinecraftYABMapCompat"
+		],
+		"client": [
+			"es.b4t.client.MinecraftYABMapCompatClient"
+		]
+	},
+	"mixins": [
+		"minecraft-yab-map-compat.mixins.json",
+		{
+			"config": "minecraft-yab-map-compat.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.2",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*",
+		"fabric-language-kotlin": "*"
+	}
+}
