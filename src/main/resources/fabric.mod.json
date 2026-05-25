@@ -3,13 +3,13 @@
 	"id": "minecraft-yab-map-compat",
 	"version": "${version}",
 	"name": "Minecraft YAB Map-Compat",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "This mod resets your favourite map mod (Xaero's or Journeymap) when the game is about to start!",
 	"authors": [
-		"Me!"
+		"B4T3S"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://github.com/B4T3S/minecraft-yab-map-compat",
+		"sources": "https://github.com/B4T3S/minecraft-yab-map-compat"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/minecraft-yab-map-compat/icon.png",
