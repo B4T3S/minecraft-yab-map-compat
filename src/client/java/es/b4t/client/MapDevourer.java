@@ -25,9 +25,7 @@ public class MapDevourer {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
 
         if (FabricLoader.getInstance().isModLoaded("xaeroworldmap")) {
-            if (player != null) {
-                player.sendMessage(Text.literal("Detected Xaero's worldmap at bingo start. Deleting old map data...").withColor(DyeColor.YELLOW.getSignColor()).formatted(Formatting.ITALIC), false);
-            }
+            yellAtPlayer(player, "Xaero's worldmap");
             logger.log(Level.INFO, "Found Xaero's worldmap, deleting map!");
             MapProcessor mapProcessor = XaeroWorldMapCore.currentSession.getMapProcessor();
             // Delete all map files
@@ -35,9 +33,7 @@ public class MapDevourer {
             // Force a reload from disk
             mapProcessor.getMapWorld().getCurrentDimension().clear();
         } else if (FabricLoader.getInstance().isModLoaded("journeymap")) {
-            if (player != null) {
-                player.sendMessage(Text.literal("Detected Journeymap at bingo start. Deleting old map data...").withColor(DyeColor.YELLOW.getSignColor()).formatted(Formatting.ITALIC), false);
-            }
+            yellAtPlayer(player, "Journeymap");
             DeleteMapTask.queue(true);
         } else {
             logger.error("Didn't find Xaero's Worldmap or Journeymap.... this is awkward");
@@ -51,6 +47,16 @@ public class MapDevourer {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    private static void yellAtPlayer(ClientPlayerEntity player, String mapType) {
+        if (player != null) {
+            player.sendMessage(
+                    Text.literal("Detected ").withColor(DyeColor.YELLOW.getSignColor()).formatted(Formatting.ITALIC)
+                            .append(Text.literal(mapType).withColor(DyeColor.CYAN.getSignColor()).formatted(Formatting.BOLD).formatted(Formatting.ITALIC))
+                            .append(Text.literal(" at bingo start. Deleting old map data...").withColor(DyeColor.YELLOW.getSignColor()).formatted(Formatting.ITALIC))
+            , false);
         }
     }
 }
