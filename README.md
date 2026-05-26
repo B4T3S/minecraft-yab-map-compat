@@ -1,3 +1,5 @@
+![](./src/main/resources/assets/minecraft-yab-map-compat/icon.png)
+
 # Minecraft yet another bingo map-compat
 
 This is a very simple mixin mod that deletes all map data from Xaero's worldmap or Journeymap when a round of Bingo starts.
