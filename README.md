@@ -1,4 +1,8 @@
-# Minecraft YAB Map-Compat
+# Minecraft yet another bingo map-compat
+
+This is a very simple mixin mod that deletes all map data from Xaero's worldmap or Journeymap when a round of Bingo starts.
+
+That's all it does! For now. I might still implement cleaning up waypoints and some configuration in the future.
 
 ## Setup
 
