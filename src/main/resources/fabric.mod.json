@@ -9,7 +9,8 @@
 	],
 	"contact": {
 		"homepage": "https://github.com/B4T3S/minecraft-yab-map-compat",
-		"sources": "https://github.com/B4T3S/minecraft-yab-map-compat"
+		"sources": "https://github.com/B4T3S/minecraft-yab-map-compat",
+		"issues": "https://github.com/B4T3S/minecraft-yab-map-compat/issues"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/minecraft-yab-map-compat/icon.png",
@@ -33,6 +34,7 @@
 		"fabricloader": ">=0.19.2",
 		"minecraft": "~1.21.11",
 		"java": ">=21",
-		"fabric-api": "*"
+		"fabric-api": "*",
+		"yet-another-minecraft-bingo": ">=2"
 	}
 }
