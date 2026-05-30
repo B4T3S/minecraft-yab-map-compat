@@ -59,6 +59,9 @@ dependencies {
 
 	// Xaero's worldmap
 	modCompileOnly "xaero.map:xaeroworldmap-fabric-${project.minecraft_version}:${project.xaeros_worldmap_version}"
+
+	// Xaero's minimap
+	modCompileOnly "xaero.minimap:xaerominimap-fabric-${project.minecraft_version}:${project.xaeros_minimap_version}"
 }
 
 processResources {
