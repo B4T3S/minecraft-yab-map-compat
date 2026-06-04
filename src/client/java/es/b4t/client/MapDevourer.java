@@ -14,10 +14,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import xaero.common.core.XaeroMinimapCore;
 import xaero.hud.minimap.waypoint.WaypointSession;
-import xaero.hud.minimap.waypoint.render.WaypointDeleter;
-import xaero.hud.minimap.waypoint.set.WaypointSet;
+import xaero.hud.minimap.world.container.MinimapWorldRootContainer;
 import xaero.map.MapProcessor;
 import xaero.map.core.XaeroWorldMapCore;
 import xaero.map.file.MapSaveLoad;
@@ -46,7 +46,7 @@ public class MapDevourer {
             MapProcessor mapProcessor = XaeroWorldMapCore.currentSession.getMapProcessor();
 
             // Delete all map files
-            deleteXaerosMapData(logger, MapSaveLoad.getRootFolder(mapProcessor.getCurrentWorldId()));
+            deleteFolderFromDisk(logger, MapSaveLoad.getRootFolder(mapProcessor.getCurrentWorldId()));
             // Force a reload from disk
             mapProcessor.getMapWorld().getCurrentDimension().clear();
         }
@@ -54,7 +54,7 @@ public class MapDevourer {
         if (xaerosMinimapLoaded) {
             if (!suppressChatMessage) yellAtPlayer(player, "Xaero's minimap");
             logger.log(Level.INFO, "Found Xaero's minimap, deleting waypoints!");
-            deleteXaerosWaypoints();
+            deleteXaerosWaypoints(logger);
         }
 
         if (journeymapLoaded) {
@@ -64,10 +64,10 @@ public class MapDevourer {
         }
     }
 
-    private static void deleteXaerosMapData(Logger logger, Path path) {
+    private static void deleteFolderFromDisk(Logger logger, Path path) {
         if (FileUtils.isDirectory(path.toFile())) {
             try {
-                logger.info(String.format("Deleting Xaero's folder at %s", path));
+                logger.info(String.format("Deleting Folder at %s", path));
                 FileUtils.deleteDirectory(path.toFile());
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -75,13 +75,17 @@ public class MapDevourer {
         }
     }
 
-    private static void deleteXaerosWaypoints() {
+    private static void deleteXaerosWaypoints(Logger logger) {
         WaypointSession waypointSession = XaeroMinimapCore.currentSession.getMinimapProcessor().getSession().getWaypointSession();
-        Iterable<WaypointSet> waypointSets = waypointSession.getSession().getWorldManager().getCurrentWorld().getIterableWaypointSets();
-        WaypointDeleter deleter = waypointSession.getDeleter();
-        deleter.begin();
-        waypointSets.forEach(waypointSet -> {
-            waypointSet.getWaypoints().forEach(deleter::add);
+        MinimapWorldRootContainer container = waypointSession.getSession().getWorldManager().getCurrentRootContainer();
+
+        container.getAllWorldsIterable().forEach(minimapWorld -> {
+            minimapWorld.getCurrentWaypointSet().clear();
+            try {
+                container.getSession().getWorldManagerIO().saveWorld(minimapWorld);
+            } catch (IOException e) {
+                logger.error("Failed to save map after deleting waypoints! Waypoints will most likely stay behind!");
+            }
         });
     }
 
